@@ -12,7 +12,7 @@ let audioContext;
 
 function preload() {
     img = loadImage('1.png');
-    sound = loadSound('fire.wav');
+    sound = loadSound('fire.mp3');
     if (!audioContext){
         audioContext = new AudioContext();
         audioContext.resume()
@@ -62,6 +62,13 @@ function draw() {
     let playbackRate = map(velocity, 0, maxVelocity, 0, 5);
     playbackRate = constrain(playbackRate, 0.01, 4);
     sound.rate(playbackRate);
+    if (!sound.isPlaying()){
+        sound.loop();
+        console.log(sound.isPlaying())
+    }
+    if (getAudioContext().state !== 'running') {
+        getAudioContext().resume();
+    }
 }
 
 class Star {
